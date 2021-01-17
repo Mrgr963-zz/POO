@@ -80,7 +80,10 @@ class Tarifas {
     }
     
     void GetExtratoN(int qnt) {
-        for (int i = extrato.size(); i > (extrato.size())-qnt; i--) {
+        ArrayList<Operacoes> aux = new ArrayList<Operacoes>();
+        aux = extrato;
+        Collections.reverse(aux);
+        for (int i = 0; i < qnt; i++) {
             System.out.println(extrato.get(i));
         }
     }

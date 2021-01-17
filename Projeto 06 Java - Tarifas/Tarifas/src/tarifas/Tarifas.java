@@ -26,7 +26,7 @@ class Tarifas {
     int numero;
     ArrayList<Operacoes> extrato = new ArrayList<Operacoes>();
     
-    void AddOp(String descricao, float valor) {
+    void addOp(String descricao, float valor) {
         Operacoes op = new Operacoes(idNext, descricao, valor, this.saldo);
         idNext += 1;
         extrato.add(op);
@@ -35,51 +35,51 @@ class Tarifas {
     void depositar(float valor) {
         if (valor > 0) {
             this.saldo += valor;
-            AddOp("deposito", valor);
+            addOp("deposito", valor);
             System.out.println("Você depositou: " + valor + " || Seu saldo: " + saldo);
         } else {
             System.out.println("Valor Inválido!");
         }
     }
 
-    void Saque(float valor) {
+    void saque(float valor) {
         if (valor > 0 && valor < saldo) {
             this.saldo -= valor;
-            AddOp("saque", -valor);
+            addOp("saque", -valor);
             System.out.println("Você sacou: " + valor + " || Seu saldo: " + saldo);
         } else {
             System.out.println("Valor Inválido!");
         }
     }
     
-    void Tarifa(float valor) {
+    void tarifa(float valor) {
         if (valor > 0 && valor < saldo) {
             this.saldo -= valor;
-            AddOp("tarifa", -valor);
+            addOp("tarifa", -valor);
             System.out.println("Conta tarifada em: " + valor + " || Seu saldo: " + saldo);
         } else {
             System.out.println("Valor Inválido!");
         }
     }
     
-    void Extornar(int id) {
+    void extornar(int id) {
         if (id > 0 && id <= extrato.size() && extrato.get(id).desc.equals("tarifa")) {
             saldo = -(extrato.get(id).saldo);
-            AddOp("extorno", id);
+            addOp("extorno", id);
             System.out.println("Extorno efetuado || Seu saldo: " + saldo);
         } else {
             System.out.println("ID Inválido!");
         }
     }
     
-    void GetExtrato() {
+    void getExtrato() {
         for (int i = 0; i < extrato.size(); i++) {
             System.out.println(extrato.get(i));
             
         }
     }
     
-    void GetExtratoN(int qnt) {
+    void getExtratoN(int qnt) {
         ArrayList<Operacoes> aux = new ArrayList<Operacoes>();
         aux = extrato;
         Collections.reverse(aux);
@@ -104,15 +104,15 @@ class Tarifas {
             } else if (ui[0].equals("deposito")) {
                 t1.depositar(Float.parseFloat(ui[1]));
             } else if (ui[0].equals("saque")) {
-                t1.Saque(Float.parseFloat(ui[1]));
+                t1.saque(Float.parseFloat(ui[1]));
             } else if (ui[0].equals("tarifa")) {
-                t1.Tarifa(Float.parseFloat(ui[1]));
+                t1.tarifa(Float.parseFloat(ui[1]));
             } else if (ui[0].equals("extornar")) {
-                t1.Extornar(Integer.parseInt(ui[1]));
+                t1.extornar(Integer.parseInt(ui[1]));
             } else if (ui[0].equals("extrato")) {
-                t1.GetExtrato();
+                t1.getExtrato();
             } else if (ui[0].equals("extratoN")) {
-                t1.GetExtratoN(Integer.parseInt(ui[1]));
+                t1.getExtratoN(Integer.parseInt(ui[1]));
             } else {
                 System.out.println("Comando Inválido!");
             }

@@ -1,10 +1,5 @@
 # Relatório do Exercício S02E01 - João Victor (G.R) Serra Souza 
 
-## Índice []()
-<!--TOC_BEGIN-->
-- [Relatório do Exercício S02E01](#Exercício-S02E01)
-<!--TOC_END-->
-
 ## Exercício-S02E01
 **Calango VS Dungeon**
 

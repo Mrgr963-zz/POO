@@ -1,10 +1,5 @@
 # Relatório do Exercício S02E01 - João Victor (G.R) Serra Souza 
 
-## Índice []()
-<!--TOC_BEGIN-->
-- [Relatório do Exercício S03E02](#Exercício-S03E02)
-<!--TOC_END-->
-
 ## Exercício-S03E02
 **Munição & Armamento**
 

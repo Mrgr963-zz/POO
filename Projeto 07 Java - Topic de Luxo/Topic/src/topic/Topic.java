@@ -9,7 +9,7 @@ class Pass {
             this.idade = idade;
         }
     public String toString() {
-        return "";
+       return "nome: " + nome + " idade: " + idade ;
     }
 }
 

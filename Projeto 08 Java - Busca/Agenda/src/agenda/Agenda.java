@@ -1,209 +1,152 @@
 package agenda;
 import java.util.*;
 
-class Fone {
-    String id;
-    String number;
+class Fone{
+    private String label;
+    private String number;
     
-    public Fone (String id, String number) {
-        this.id = id;
+    public Fone (String label, String number) {
+        this.label = label;
         this.number = number;
     }
-
+    
+    Fone(String serial) {
+        String array[]= serial.split(":");
+        label = array[0];
+        number = array[1];
+    }
+    
+    static public boolean validate(String number) {
+        String nums = "0123456789().-";
+        for (int i = 0; i < number.length(); i++) {
+            if (!nums.contains("" + number.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public String getLabel() {
+        return this.label;
+    }
+    
+    public String getNumber() {
+        return this.number;
+    }
+    
     public String toString() {
-        return id + ":" + number ;
+        return label + number;
     }
 }
 
 class Contato {
-    String name;
-    ArrayList<Fone> fones;
+    private String name;
+    private ArrayList<Fone> fones;
     
-    public Contato(String name) {
+    public Contato (String name) {
         this.name = name;
-        this.fones = fones;
+        fones = new ArrayList<Fone>();
     }
     
-    boolean validate(String number) {
-        boolean res = true;
-        String nums = "1234567890().";
-        int aux = 0;
-
-        for (int i = 0 ; i < number.length(); i++) {
-            if (res == false) {
-                System.out.println("Número inválido");
-            } else {
-                for (int j = 0 ; j < nums.length(); j++) {
-                    if (number.charAt(i) != nums.charAt(j)) {
-                        aux += 1;
-                    } if (aux == nums.length()) {
-                        res = false;
-                    }
-                }
-            }
+    public void addFone(String label, String num) {
+        if (!Fone.validate(num)) {
+            System.out.println("ERROR: Este número não é válido!");
+        } else {
+            fones.add(new Fone(label, num));
         }
-        return res;
     }
-
+    
+    public void addFone (Fone fone) {
+        this.addFone(fone.getLabel(), fone.getNumber());
+    }
+    
+    public void rmFone(int index) {
+        fones.remove(fones.get(index));
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
     public String toString() {
-        String aux = "[";
-        for (int i = 0; i < fones.size(); i++) {
-            Fone num = fones.get(i);
-            aux = i + ":" + num + "]";
-        }
-        return this.name + aux;
+        return name;
     }
 }
 
-class orgnz implements Comparator<Contato>{
-    public int compare(Contato x, Contato y) {
-        return x.name.compareTo(y.name);
-    }
-}
-
-public class Agenda {
-    ArrayList<Contato> contatos;
+class Agenda {
+    private ArrayList<Contato> contacts;
     
     public Agenda() {
-        this.contatos = new ArrayList<Contato>();
+    contacts = new ArrayList<Contato>();
     }
-
-    boolean checkContato(String nome){
-        String aux;
-        
-        for(int i = 0; i < contatos.size(); i++){
-            aux = contatos.get(i).name;
-            if(nome.equals(aux)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    int getContatoPosition(String nome) {
-        String aux;
-
-        for (int i = 0; i < contatos.size(); i++) {
-            aux = contatos.get(i).name;
-            if (nome.equals(aux)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    Contato getContato(String nome) {
-        String aux;
-
-        for (int i = 0; i < contatos.size(); i++) {
-            aux = contatos.get(i).name;
-            if (nome.equals(aux)) {
-                return contatos.get(i);
+    
+    Contato getContato(String name) {
+        for (Contato contato : contacts) {
+            if (contato.getName().equals(name)) {
+                return contato;
+            } else {
+                System.out.println("ERROR: Esse contato não existe");
             }
         }
         return null;
     }
-        
-    void addContato(String nome) {
-        if (checkContato(nome) == true) {
-            System.out.println("ERROR: O contato já existe!");
-        } else {
-            contatos.add(new Contato(nome));
-        }
-    }
-
-    void addNumber(String nome, String desc, String num) {
-        if (checkContato(nome) == true) {
-            getContato(nome).fones.add(new Fone(num, desc));
-            return;
-        }
-        System.out.println("ERROR: Contato não encontrado!");
-    }
     
-    
-    void rmvContato(String nome) {
-        contatos.remove(getContatoPosition(nome));
-    }
-
-    void rmvNum(String nome, String id) {
-        if (checkContato(nome) == true) {
-            getContato(nome).fones.remove(Integer.parseInt(id));
-            return;
-        }
-        System.out.println("ERROR: Contato não encontrado!");
-    }
-
-    void sort() {
-        Collections.sort(contatos, new orgnz());
-        for (Contato contato : contatos) {
-            System.out.println("- " + contato);
-        }
-    }
-
-    public void search(String pattern) {
+    ArrayList<Contato> findContact(String pattern) {
         ArrayList<Contato> aux = new ArrayList<Contato>();
-
-        for (Contato contato : contatos) {
-            if (contato.name.contains(pattern)) {
+        
+        for (Contato contato: contacts){
+            if (contato.toString().contains(pattern)) {
                 aux.add(contato);
+                return aux;
             }
-            ArrayList<Fone> fones = contato.fones;
-            for (Fone fone : fones) {
-                if (fone.number.contains(pattern)) {
-                    aux.add(contato);
-                }
-            }
+            
         }
-        for (Contato contato : aux) {
-            System.out.println("- " + contato);
-        }
+        return null;
     }
-
-    boolean validate(String number) {
-        boolean res = true;
-        String nums = "1234567890().";
-        int aux = 0;
-
-        for (int i = 0 ; i < number.length(); i++) {
-            if (res == false) {
-                System.out.println("Número inválido");
+    
+   public void addContact(String name, ArrayList<Fone> fone) {
+        for (int i = 0; i < contacts.size(); i++) {
+            if (contacts.get(i).getName().equals(name)) {
+                for (Fone fones : fone) {
+                    contacts.get(i).addFone(fones);
+                }
             } else {
-                for (int j = 0 ; j < nums.length(); j++) {
-                    if (number.charAt(i) != nums.charAt(j)) {
-                        aux += 1;
-                    } if (aux == nums.length()) {
-                        res = false;
-                    }
-                }
+                contacts.add(new Contato(name));
             }
         }
-        return res;
-    }
+   }
+   
+   public boolean rmContact(String name) {
+       for (Contato contato : contacts) {
+           if (contato.getName().equals(name)) {
+               contacts.remove(contato);
+               return true;
+           }
+       }
+       return false;
+   }
+    
+   public ArrayList<Contato> getContatos() {
+       ArrayList<Contato> aux = new ArrayList<Contato>();
+       for (int i = 0; i < contacts.size(); i++) {
+           aux.add(contacts.get(i));
+       }
+       return aux;
+   }
+    
+   public String toString() {
+       String aux;
+       
+       aux = "[";
+       aux += " " + contacts + " " ;
+       aux += "]";
+       
+       return aux;
+   }
     
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         Agenda a1 = new Agenda();
-
-        while (true) {
-        String line = scanner.nextLine();
-        String ui[] = line.split(" ");
-            if (ui[0].equals("break")) {
-                break;
-            } else if (ui[0].equals("addC")) {
-                a1.addContato(ui[1]);
-            } else if (ui[0].equals("addN")) {
-                a1.addNumber(ui[1], ui[2], ui[3]);
-            } else if (ui[0].equals("show")) {
-                a1.sort();
-            } else if (ui[0].equals("search")) {
-                a1.search(ui[1]);
-            } else if (ui[0].equals("rmvC")) {
-                a1.rmvContato(ui[1]);
-            } else if (ui[0].equals("rmvN")) {
-                a1.rmvNum(ui[1], ui[2]);
-            } else {
-                System.out.println("ERROR: Comando Inválido!");
-            }
-        }
+        
+        a1.addContact("eva", new ArrayList<Fone>(new Fone("oi","555")));      
     }
 }

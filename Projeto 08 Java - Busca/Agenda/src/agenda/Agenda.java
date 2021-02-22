@@ -73,6 +73,12 @@ class Contato {
     }
 }
 
+class Comparador implements Comparator <Contato> {
+    public int compare (Contato x, Contato y) {
+        return x.getName().compareTo(y.getName());
+    }
+}
+
 class Agenda {
     private ArrayList<Contato> contacts;
     
@@ -91,6 +97,16 @@ class Agenda {
         return null;
     }
     
+    private int getContact (String nome) {
+        for (int i = 0; i < contacts.size(); i++) {
+            Contato contato = contacts.get(i);
+            if (contato != null && contato.getName().equals(nome)) {
+                return i;
+            }
+        } return -1;
+    }
+    
+    
     ArrayList<Contato> findContact(String pattern) {
         ArrayList<Contato> aux = new ArrayList<Contato>();
         
@@ -104,25 +120,31 @@ class Agenda {
         return null;
     }
     
-   public void addContact(String name, ArrayList<Fone> fone) {
-        for (int i = 0; i < contacts.size(); i++) {
-            if (contacts.get(i).getName().equals(name)) {
-                for (Fone fones : fone) {
-                    contacts.get(i).addFone(fones);
-                }
-            } else {
-                contacts.add(new Contato(name));
-            }
+   public void addContact(String name, Fone fone) {
+        Contato contato = this.getContato(name);
+        if (contato == null) {
+            contato = new Contato(name);
+            this.contacts.add(contato);
         }
+        contato.addFone(fone.getLabel(), fone.getNumber());
+   }
+   
+   public void addContact (String name, List<Fone> fones) {
+       Contato contato = this.getContato(name);
+       if (contato == null) {
+           contato = new Contato(name);
+           this.contacts.add(contato);
+       } for (Fone fone : fones) {
+           contato.addFone(fone.getLabel(), fone.getNumber());
+       }
    }
    
    public boolean rmContact(String name) {
-       for (Contato contato : contacts) {
-           if (contato.getName().equals(name)) {
-               contacts.remove(contato);
-               return true;
-           }
-       }
+       int aux = getContact(name);
+       if (aux != -1) {
+           this.contacts.remove(aux);
+           return true;
+       } System.out.println("ERROR: Esse contato não existe!");
        return false;
    }
     
@@ -146,7 +168,29 @@ class Agenda {
     
     public static void main(String[] args) {
         Agenda a1 = new Agenda();
+        Scanner scanner = new Scanner (System.in);
         
-        a1.addContact("eva", new ArrayList<Fone>(new Fone("oi","555")));      
+        while (true) {
+            String line = scanner.nextLine();
+            String ui[] = line.split(" ");
+            
+            if (ui[0].equals("end")) {
+                break;
+            } else if (ui[0].equals("show")) {
+                System.out.println(a1);
+            } else if (ui[0].equals("add")) {
+                List<Fone> fones = new ArrayList<Fone>();
+                
+                for (int i = 2; i < ui.length; i++) {
+                    fones.add(new Fone(ui[i]));
+                }
+                a1.addContact((ui[1]), fones);
+                Collections.sort(a1.getContatos(), new Comparador());
+            } else if (ui[0].equals("rmvContact")) {
+                a1.rmContact(ui[1]);
+            } else if (ui[0].equals("findContact")) {
+                System.out.println(a1.findContact(ui[1]));
+            }
+        }
     }
 }

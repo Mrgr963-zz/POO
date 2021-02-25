@@ -58,6 +58,7 @@ class Contact {
         }
     }
     
+    
     public void rmFone(int index) {
         if (index < 0 || index > fones.size()) {
             System.out.println("ERROR: Index Inválido!");

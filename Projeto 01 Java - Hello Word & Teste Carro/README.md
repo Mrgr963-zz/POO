@@ -1,7 +1,6 @@
-# Relatório do Exercício S01E02 - João Victor (G.R) Serra Souza 
+# Relatório do Exercício Hello World - João Victor (G.R) Serra Souza 
 
-## Exercício-S01E02
-**Tarifas**
+## Exercício - Hello World
 
 **1) Oque fez:**
 Para este projeto fiz dois códigos. O código padrão do Hello World como pedido pelo projeto e o código do carro.

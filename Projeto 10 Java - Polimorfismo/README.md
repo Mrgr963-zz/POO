@@ -1,6 +1,6 @@
-# Relatório do Exercício Excessões & Heranças - João Victor (G.R) Serra Souza 
+# Relatório do Exercício Polimorfismo - João Victor (G.R) Serra Souza 
 
-## Exercício-Excessões & Heranças
+## Exercício - Polimorfismo
 
 
 **1) Oque fez:**

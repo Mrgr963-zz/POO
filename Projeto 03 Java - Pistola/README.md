@@ -1,7 +1,6 @@
-# Relatório do Exercício S02E01 - João Victor (G.R) Serra Souza 
+# Relatório do Exercício Pistola - João Victor (G.R) Serra Souza 
 
-## Exercício-S03E02
-**Munição & Armamento**
+## Exercício - Pistola
 
 **1) Oque fez:**
 A ideia principal da atividade era fazer uma arma de um certo calibre que poderia ser carregada com munições e disparada. Pra que isso seja feito a arma deve estar carregada com o cartucho, para recarregar os cartuchos com as balas é necessário remover o cartucho da arma e inserir uma quantidade de munições do mesmo calibre da arma.

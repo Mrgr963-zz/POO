@@ -1,6 +1,6 @@
 # Relatório do Exercício Busca - João Victor (G.R) Serra Souza 
 
-## Exercício-Busca
+## Exercício - Busca
 
 
 **1) Oque fez:**

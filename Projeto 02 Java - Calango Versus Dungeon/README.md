@@ -1,7 +1,6 @@
-# Relatório do Exercício S02E01 - João Victor (G.R) Serra Souza 
+# Relatório do Exercício Calango Versus - João Victor (G.R) Serra Souza 
 
-## Exercício-S02E01
-**Calango VS Dungeon**
+## Exercício - Calango Versus
 
 **1) Oque fez:**
 Em minha atividade tentei moldar o exemplo do calango pra algo que eu goste, um Dungeon-Crawler, gênero de jogo de RPG muito popular na época do DOS. Minha ideia principal era já adaptar o código a partir de um pequeno projeto a parte que eu havia de feito durante a cadeira de FUP, onde testei diversos mecanismos com base na geração de números aleatórios.

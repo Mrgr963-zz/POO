@@ -1,12 +1,6 @@
 # Relatório do Exercício Topic - João Victor (G.R) Serra Souza 
 
-## Índice []()
-<!--TOC_BEGIN-->
-- [Relatório do Exercício Topic](#Exercício-Topic)
-<!--TOC_END-->
-
-## Exercício-Topic
-**Topic**
+## Exercício - Topic
 
 **1) Oque fez:**
 Neste projeto construi o código uma topic, implementando um sistema de alocação de passageiros, assentos preferenciais e remoção de passageiros por nome.

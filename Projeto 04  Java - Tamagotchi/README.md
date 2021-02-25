@@ -1,7 +1,6 @@
-# Relatório do Exercício S04E01 - João Victor (G.R) Serra Souza 
+# Relatório do Exercício Tamagotchi (G.R) Serra Souza 
 
-## Exercício-S04E01
-**Tarifas**
+## Exercício - Tamagotchi
 
 **1) Oque fez:**
 Neste projeto fiz um código de um Tamagotchi, onde o jogador pode criar uma criatura. Ele deve alimentar, banhar e brincar com o Tamagotchi. Realizar uma tarefa muitas vezes acaba no detrimento de outras tarefas e acarreta a morte do bixinho virtual.

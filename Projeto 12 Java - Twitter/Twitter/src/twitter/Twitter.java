@@ -16,7 +16,6 @@ class Tweet {
    
     public void like(String username) {
         likes.add(username);
-        System.out.println("VOCÊ CURTIU O TWEET");
     }
     
     public int getIdTw() {
@@ -78,11 +77,15 @@ class User {
     public Tweet getTweet (int idTw) {
         Tweet tweet = timeline.get(idTw);
         tweet.like(getUsername());
-       
+        System.out.println("VOCÊ CURTIU O TWEET!");
+        
         return tweet;
     }
     
     public void sendTweet(Tweet tweet) {
+        this.timeline.put(tweet.getIdTw(),tweet);
+        this.unreadCount += 1;
+        
         for (User user : followers.values()) {
             user.getUsername();
             user.timeline.put(tweet.getIdTw(), tweet);
